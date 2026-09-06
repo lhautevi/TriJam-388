@@ -22,15 +22,21 @@ public class PlayerController : MonoBehaviour
         _hit = Physics2D.Raycast(transform.position, Vector2.down, 1.1f);
         if (_hit)
         {
-            UnityEngine.Debug.Log("tag" + _hit.collider.name);
             if (_hit.collider.gameObject.CompareTag("Ground"))
             {
-                UnityEngine.Debug.LogWarning("isGrounded");
                 isGrounded = true;
             }
+            else
+            {
+                isGrounded = false;
+            }
         }
-        //deplacement
-        float dir = Input.GetAxisRaw("Horizontal");
+        else
+        {
+            isGrounded= false;
+        }
+            //deplacement
+            float dir = Input.GetAxisRaw("Horizontal");
         rigidbody.linearVelocityX = dir * speed;
 
         //Saut
