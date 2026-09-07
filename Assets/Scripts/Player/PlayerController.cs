@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float jumpForce;
     public bool isGrounded ;
+    public float fallMultiplier= 2.5f;
 
     void Start()
     {
@@ -33,18 +34,23 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            isGrounded= false;
+            isGrounded = false;
         }
-            //deplacement
-            float dir = Input.GetAxisRaw("Horizontal");
+        //deplacement
+        float dir = Input.GetAxisRaw("Horizontal");
         rigidbody.linearVelocityX = dir * speed;
 
         //Saut
-        if(isGrounded && Input.GetButtonDown("Jump"))
+        if (isGrounded && Input.GetButtonDown("Jump"))
         {
             rigidbody.linearVelocityY = jumpForce;
         }
 
+        //Retombe
+        if (!isGrounded && rigidbody.linearVelocityY < 0)
+        {
+            rigidbody.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
         
     }
 }
