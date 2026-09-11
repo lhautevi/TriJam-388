@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,20 +29,27 @@ public class GameManager : MonoBehaviour
             if (timeLeft <= 0)
             {
                 timeLeft = 0;
-                Debug.Log("GAME OVER");
-
+                timerText.text = "GAME OVER\n Tap R to Restart";
+                gameEnded = true;
+                return;
             }
             int minutes = Mathf.FloorToInt(timeLeft / 60);
             int seconds = Mathf.FloorToInt(timeLeft % 60);
 
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
-        
+
+        if (gameEnded && Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
     }
 
     public void OnPlayerDied()
     {
         player.position = respawnPoint;
+        AudioManager.Instance.PlayRandomDeathSound();
     }
     
     public void OnPlayerWon()
