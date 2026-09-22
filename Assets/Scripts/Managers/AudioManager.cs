@@ -3,12 +3,12 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
-    
+
     private AudioSource audioSource;
 
     public AudioClip[] deathSounds;
     public AudioClip victorySound;
-    public AudioClip jumpSound;
+    public AudioClip[] jumpSounds;
 
 
     private void Awake()
@@ -22,9 +22,11 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(audioClip);
     }
 
-    public void PlayRandomDeathSound()
+    public void PlayRandomSound(AudioClip[] audioClips)
     {
-        int index = Random.Range(0,deathSounds.Length);
-        audioSource.PlayOneShot(deathSounds[index]);
+        int index = Random.Range(0,audioClips.Length);
+        audioSource.PlayOneShot(audioClips[index]);
     }
+
+   
 }

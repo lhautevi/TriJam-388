@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     public void OnPlayerDied()
     {
         player.position = respawnPoint;
-        AudioManager.Instance.PlayRandomDeathSound();
+        AudioManager.Instance.PlayRandomSound( AudioManager.Instance.deathSounds);
     }
     
     public void OnPlayerWon()

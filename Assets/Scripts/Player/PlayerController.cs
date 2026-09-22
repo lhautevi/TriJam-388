@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         //Saut
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
+            AudioManager.Instance.PlayRandomSound(AudioManager.Instance.jumpSounds);
             rigidbody.linearVelocityY = jumpForce;
         }
 
